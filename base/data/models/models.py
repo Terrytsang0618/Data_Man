@@ -18,7 +18,7 @@ class CustomerProfile(models.Model):
     br_expiry_date = models.DateField("BR Expiry Date", blank=True, null=True)
     company_type = models.CharField("Company Type", max_length=50, choices=COMPANY_CHOICES, blank=True, null=True)
     company_address = models.CharField("Company Address", max_length=100,blank=True, null=True)
-    category = models.CharField("BR Expiry Date", max_length=50,blank=True, null=True)
+    category = models.CharField("Category", max_length=50,blank=True, null=True)
     phone_regex = RegexValidator(regex=r'^\d{8}$', message="Phone number must be 8 digits.")
     tvp_contact_no = models.CharField("TVP contact phone number", validators=[phone_regex], max_length=8,blank=True, null=True)
     company_email = models.EmailField("Company Email", blank=True, null=True)

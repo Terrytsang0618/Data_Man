@@ -1,0 +1,66 @@
+{% load static %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data Management</title>
+    <link rel="stylesheet" href= '{% static "assets/DataTables/DataTables-1.13.5/css/dataTables.bootstrap5.min.css" %}' rel="stylesheet" />
+    <link rel="stylesheet" href= '{% static "assets/Bootstrap-5-5.3.0/css/bootstrap.min.css" %}' rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div><button><a href="/admin">Admin Portal</a></button></div>
+        </div>
+        <div>
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Reference Number</th>
+                        <th>Chinese Name</th>
+                        <th>English Name</th>
+                        <th>BR No.</th>
+                        <th>Contact Phone Number</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                        <td><a href="{% url 'data:detail' customer.id %}">{{customer.ref_no}}</a></td>
+                        <td>{{customer.chinese_name}}</td>
+                        <td>{{customer.english_name}}</td>
+                        <td>{{customer.br_no}}</td>
+                        <td>{{customer.tvp_contact_no}}</td>
+                        <td>{{customer.owner_set.all.0.owner_english_name}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Reference Number</th>
+                        <th>Chinese Name</th>
+                        <th>English Name</th>
+                        <th>BR No.</th>
+                        <th>Contact Phone Number</th>
+                        <th>Owner</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
+
+
+
+<script src='{% static "assets/jQuery-3.7.0/jquery-3.7.0.min.js" %}'></script>
+<script src='{% static "assets/DataTables/datatables.min.js" %}'></script>
+<script src='{% static "assets/DataTables/DataTables-1.13.5/js/jquery.dataTables.min.js" %}'></script>
+<script src='{% static "assets/DataTables/DataTables-1.13.5/js/dataTables.bootstrap5.min.js" %}'></script>
+
+
+<script>
+    new DataTable('#example');
+</script>

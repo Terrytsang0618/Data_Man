@@ -1,5 +1,86 @@
-{% load static %}
+{% extends "home.html" %}
 
+{% block content %}
+    <h2>Customer Details</h2>
+    
+    <div class="detail-section">
+        <h3>Basic Information</h3>
+        <p><strong>Reference Number:</strong> {{ customer.ref_no }}</p>
+        <p><strong>Chinese Name:</strong> {{ customer.chinese_name }}</p>
+        <p><strong>English Name:</strong> {{ customer.english_name }}</p>
+        <p><strong>Revenue Sharing:</strong> {{ customer.revenue_sharing }}</p>
+        <p><strong>Category:</strong> {{ customer.category }}</p>
+    </div>
 
-Reference Number: {{customer.ref_no}}</br>
-Chinese Name: {{customer.chinese_name}}</br>
+    <div class="detail-section">
+        <h3>Company Information</h3>
+        <p><strong>BR No:</strong> {{ customer.br_no }}</p>
+        <p><strong>BR Expiry Date:</strong> {{ customer.br_expiry_date }}</p>
+        <p><strong>Company Type:</strong> {{ customer.company_type }}</p>
+        <p><strong>Company Address:</strong> {{ customer.company_address }}</p>
+        <p><strong>Referrer:</strong> {{ customer.referrer }}</p>
+        <p><strong>Closed:</strong> {{ customer.closed }}</p>
+    </div>
+
+    <div class="detail-section">
+        <h3>Contact Information</h3>
+        <p><strong>TVP Contact No:</strong> {{ customer.tvp_contact_no }}</p>
+        <p><strong>Company Email:</strong> {{ customer.company_email }}</p>
+        <p><strong>TVP Registered Email:</strong> {{ customer.tvp_registerd_email }}</p>
+    </div>
+
+    <div class="detail-section">
+        <h3>Company Balance</h3>
+        {% if ledger %}
+            <p><strong>Bank Account:</strong> {{ ledger.customer_bank_ac }}</p>
+            <p><strong>Balance:</strong> {{ ledger.balance }}</p>
+        {% else %}
+            <p>No balance information available.</p>
+        {% endif %}
+        <p><strong>Balance Change Records:</strong></p>
+        {% if balance_changes %}
+            <ul>
+                {% for change in balance_changes %}
+                    <li>
+                        <strong>{{ change.transaction_type }}</strong>: {{ change.amount }}
+                        {% if change.transaction_date %}
+                            ({{ change.transaction_date|date:"Y-m-d H:i:s" }})
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No balance change records available.</p>
+        {% endif %}
+    </div>
+
+    <div class="detail-section">
+        <h3>Timestamps</h3>
+        <p><strong>Created At:</strong> {{ customer.created_at }}</p>
+        <p><strong>Updated At:</strong> {{ customer.updated_at }}</p>
+    </div>
+
+    <style>
+        .detail-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.2em; /* Larger font size */
+            line-height: 1.6; /* Increased line spacing */
+        }
+        .detail-section h3 {
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5em; /* Larger heading font size */
+        }
+        .detail-section p {
+            margin: 10px 0;
+        }
+        .detail-section ul {
+            padding-left: 20px;
+        }
+    </style>
+{% endblock %}

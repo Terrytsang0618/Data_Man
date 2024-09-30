@@ -30,6 +30,22 @@
     </div>
 
     <div class="detail-section">
+        <h3>MPF Information</h3>
+        <p><strong>MPF Pending No.:</strong> {{ customer.mpf_pending_no }}</p>
+        <p><strong>MPF Account:</strong> {{ customer.mpf_account }}</p>
+        <p><strong>MPF Password:</strong> ********</p>
+    </div>
+
+    <div class="detail-section">
+        <h3>Owner Information</h3>
+        <p><strong>Chinese Name:</strong> {{ customer.owner_set.all.0.owner_chinese_name }}</p>
+        <p><strong>English Name:</strong> {{ customer.owner_set.all.0.owner_english_name }}</p>
+        <p><strong>Phone:</strong> {{ customer.owner_set.all.0.phone }}</p>
+        <p><strong>Share:</strong> {{ customer.owner_set.all.0.shares }}%</p>
+    </div>
+
+
+    <div class="detail-section">
         <h3>Company Balance</h3>
         {% if ledger %}
             <p><strong>Bank Account:</strong> {{ ledger.customer_bank_ac }}</p>
